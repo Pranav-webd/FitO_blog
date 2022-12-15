@@ -1,0 +1,693 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>FitO - All-in-One Health Tool</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="84a91877-0098-4599-a0ed-1af57ab0f706" class="page sans"><header><h1 class="page-title">FitO - All-in-One Health Tool</h1></header><div class="page-body"><h2 id="b183ce28-bfbb-4a50-bb29-0ec861dffa98" class="">About</h2><p id="bd4cc7e9-3e0b-404c-b790-e308fac04f4a" class="">FitO is an all-in-one health Android app which helps monitor our daily lifestyle. Several features of it include:</p><ul id="61698531-cb90-48ab-821e-3f4babf9c4d0" class="bulleted-list"><li style="list-style-type:disc"><strong>Tracking your footsteps</strong></li></ul><ul id="dd2785fc-7272-4ebe-a787-fe686e594148" class="bulleted-list"><li style="list-style-type:disc"><strong>Monitor your daily diet</strong> - one can add food items they have eaten in their daily routine and monitor their <strong>calorie intake </strong>and other nutrients </li></ul><ul id="d4e4fff1-74aa-46b9-acdc-f30aa3073256" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Can track calories - </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>eaten and burnt with daily exercises</li></ul><ul id="b41a350c-e250-4426-a2d9-27b7677b1990" class="bulleted-list"><li style="list-style-type:disc"><strong>Keep a check on your water intake</strong></li></ul><ul id="1f1cbacb-707e-4c95-bd18-cbc0ee398d2c" class="bulleted-list"><li style="list-style-type:disc"><strong>Monitor your sleep cycle</strong></li></ul><ul id="4e81751b-6d8d-4b37-9967-37517f52139b" class="bulleted-list"><li style="list-style-type:disc"><strong>and keeps you motivated</strong></li></ul><p id="e633b99e-95ff-430f-b5ed-3746e9657156" class="">It also provides the user with their personal <strong>Health Diary</strong>, where the user can take a peek into their fitness history and accounts for all the activities for a particular day (just like a daily diary entry!). Also, it provides <strong>Statistical analysis</strong> of the activities on a weekly and monthly basis with the help of charts where one can monitor their overall activity from the past and try to improve.</p><h2 id="0b9834b2-db3b-440a-ba2d-202688303fea" class="">App Architecture</h2><p id="433fdd2b-58c9-4980-8a1f-13237b03e3d1" class="">The Architecture used in this app is <strong>Model-View-Controller (MVC)</strong>. Let’s take a glance at the file structure:</p><div id="9e7c9acd-270b-4d79-b0d4-a7f73a7d8c92" class="column-list"><div id="afa73ba6-986a-47fe-a667-2fdf5f68d55b" style="width:100%" class="column"><figure id="4b9cb384-82d2-4e3b-ae2e-4af0d0289e14" class="image" style="text-align:center"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled.png"><img style="width:336px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled.png"/></a></figure></div><div id="b57052f8-c20d-4c9f-a6bb-9f4331094ed9" style="width:100%" class="column"><figure id="cdd20726-ffb0-47a2-8480-334efbf7be6e" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%201.png"><img style="width:336px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%201.png"/></a></figure></div></div><ul id="a0114864-f8d7-472e-ab37-bfa233071d40" class="bulleted-list"><li style="list-style-type:disc"><strong>Model</strong> - We can see the Helper database classes, which populate the data like get data, set data etc., are separated from others.</li></ul><ul id="10b5d1fe-d72b-4c02-b6d6-15eefbb879b6" class="bulleted-list"><li style="list-style-type:disc"><strong>View</strong> - All the layouts are separated from other classes and help display to the user on the screen.</li></ul><ul id="89e82112-f52e-4391-8140-a948927b10df" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Controller </strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong>- The brains of the system, each segment of the app is constituted in a particular folder to organize the classes in a better way.</li></ul><p id="745053eb-8bb2-4a3e-ade7-70e20f412813" class="">
+</p><h2 id="bcdce633-d8b5-4361-a3cf-858b7b307c5c" class="">Design &amp; Features</h2><div id="ad9cba7e-fe12-4a20-9959-3ae1c24c7241" class="column-list"><div id="5e6206e0-ef4c-4f1b-bb53-129e828cd67e" style="width:100%" class="column"><p id="3a06a3bb-9026-4998-8991-6905589e135a" class="">This is how the app dashboard looks like once the user logins. It has a bottom navigation bar: <strong>Dashboard, Food, Activity and Diary.</strong> </p><h3 id="d4b5e0e4-bf67-4c02-ac0e-e68772763353" class="">Dashboard</h3><p id="e9d0ecfc-c8f1-4f7c-8fbe-8dd6292a8e1b" class="">The image shown on the right is of the Dashboard. As mentioned, it displays all the details for the current day entered by the user. The progress bar shown is the Calories bar which will be activated after the user sets his goals using the set goal section, which can be accessed by clicking the set goal button. These are the goals which the user wants to achieve.</p><p id="4aab620a-310c-436d-9f56-c82992f43d9a" class="">The 4 cards - Steps, Water Intake, Sleep, and Weight give access to the statistics section, where the user can see weekly and monthly stats in form of charts (as shown in the image). These stats only include the values the user has saved; otherwise, saving null values disrupts the chart.</p><figure id="aed988b8-f19f-463c-b1bf-855ce829f7f3" class="image" style="text-align:center"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%202.png"><img style="width:192px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%202.png"/></a></figure><p id="644d19b8-c7d0-4e16-b83e-ff6bccc16cb9" class="">
+</p><h3 id="ad032b29-7c29-4ac1-96f3-34c173f7a032" class="">Food</h3><p id="40cad971-a420-42f8-9195-2b01631390e3" class="">This section will show the user calories consumed compared to set goals by him/her using a progress bar. The three display circles have the user&#x27;s total intake information of Fats, Carbs and Proteins. The three cards below are used to add food at their corresponding times.</p><p id="5c4946b7-ad68-4501-8de8-e753d8e38a82" class="">The user must click on the +, put the item name and portion size on the respective field, and click submit. The added items will be displayed so. It would look something like this:</p><figure id="4058ebc3-1f1c-4560-8565-d0e8e15c2283" class="image" style="text-align:center"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%203.png"><img style="width:192px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%203.png"/></a></figure><p id="aa83e86e-0e06-478e-b50a-3defb15484ca" class="">
+</p><h3 id="e409414c-6505-4452-9647-8e31a67f1c92" class="">Activities</h3><p id="bf4dd145-fe35-4462-b4c4-986ddd136368" class="">If the user wants to add the activity name and calories burnt, he has to add them in the corresponding fields and click submit. The changes will be reflected in the calories burnt info.</p><p id="26857330-6572-4d58-8940-20201292e8a2" class="">
+</p><h3 id="c7d5ab7c-67c0-4690-bdbd-1adc9c0660d3" class="">Diary</h3><p id="94ae0966-42a9-40c0-b38a-755c3af4246f" class="">The user can access data specific to the date he chooses. All the stored by him/her will be displayed along with the items he ate and activities he performed with respective calories burnt and consumed on that day.</p><p id="4b768af3-d58f-4ada-904f-b1b36b5b6f19" class="">The user can access data specific to the date he chooses. All the stored by him/her will be displayed along with the items he ate and activities he performed with respective calories burnt and consumed on that day.</p><figure id="93d58f27-e09e-480e-b1dc-a1e1f3151e91" class="image" style="text-align:center"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%204.png"><img style="width:240px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%204.png"/></a></figure></div><div id="f5571ddf-bbc7-41de-b639-43299b5978f0" style="width:50%" class="column"><figure id="eaab4699-2997-4916-a874-5df353aaa141" class="image" style="text-align:left"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%205.png"><img style="width:192px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%205.png"/></a><figcaption>Dashboard</figcaption></figure><p id="758bd8ed-88af-4d86-b7dc-af2e9bdf6895" class="">
+</p><p id="d465f700-4a1a-4896-895d-d29ac08b3532" class="">
+</p><p id="d8cedc6e-6df8-4bc7-b6fd-e5969a7b5204" class="">
+</p><p id="ee49e4c9-3133-4cb8-bff3-e8e359b0b799" class="">
+</p><p id="e66e68bd-7c0d-460b-bf3d-eec26f8622b2" class="">
+</p><p id="b64c6470-c69c-4b30-8c0a-8fe1e1bea146" class="">
+</p><p id="53c8f2e9-da9f-4cc4-9121-e5da2fb0942b" class="">
+</p><p id="5ce7753d-30c0-4a65-b391-9af8a0103941" class="">
+</p><p id="39014bb1-8ca3-44de-8362-b06dec10a51e" class="">
+</p><p id="70fbceb5-8246-4881-a31b-f54b49d57bbd" class="">
+</p><figure id="3aac14a5-50d0-418a-a387-0fcb952139c4" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled.jpeg"><img style="width:540px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled.jpeg"/></a><figcaption>Food</figcaption></figure><p id="02ef0eaf-c172-480d-b786-9bd3c67db07f" class="">
+</p><p id="5333701f-9f33-4ebc-87f2-a81758d5a84d" class="">
+</p><figure id="f241c174-bd97-477a-b39f-512876a178c8" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%201.jpeg"><img style="width:540px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%201.jpeg"/></a><figcaption>Activity</figcaption></figure><p id="3af891cd-01da-40b8-bbbd-52f75bf9360d" class="">
+</p><figure id="e637326f-c4f8-4a58-8b53-d56afbdacefa" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%206.png"><img style="width:425px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%206.png"/></a><figcaption>Diary</figcaption></figure></div></div><p id="a83e2eb8-bc91-408f-959a-ccc3ef1c0ca5" class="">
+</p><h3 id="36c715df-5a83-46d6-925a-aa7e61ce3cef" class="">Other Android Features:</h3><ul id="1e7dbd53-9f1f-4d73-8c1d-253c222ec11b" class="bulleted-list"><li style="list-style-type:disc"><strong>Components built using Fragments:</strong> To improve reusability, almost all of the views are made using Fragments which also helps in the easy navigation of tabs.</li></ul><ul id="76a276f7-cbce-4903-ab63-782c6f8aa7ab" class="bulleted-list"><li style="list-style-type:disc"><strong>Use of Nav Controller: </strong>We have used the Nav controller to navigate through the bottom tabs or any other fragments connected.</li></ul><ul id="a878c472-d3ca-41c9-a7a4-ed9a2476074a" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong>Navigation view</strong></strong></strong></strong></li></ul><figure id="789a99b8-e0b7-4822-b0b7-aa365229752f" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%207.png"><img style="width:1272px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%207.png"/></a></figure><p id="2605f241-3444-4e6b-a0e5-ea11dff17195" class="">
+</p><ul id="b4c0eec7-1e2c-44b2-a3d9-593c59f69e47" class="bulleted-list"><li style="list-style-type:disc"><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>Database used - Firebase</strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong></strong><ul id="b7163e55-4552-47bb-a9bb-a26bb713118b" class="bulleted-list"><li style="list-style-type:circle">We are storing all users&#x27; data by creating a unique node for each user. The node will further contain nodes such as steps, activity, food_intake, etc., which have data stored in nodes of date. This is the overall structure of the database.</li></ul></li></ul><figure id="929561b7-af64-49c3-a5a2-7ce8ce0569ba" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%202.jpeg"><img style="width:1260px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%202.jpeg"/></a></figure><figure id="aa59c57a-1cef-4574-90b4-62bd28bd60e1" class="image"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%203.jpeg"><img style="width:1261px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%203.jpeg"/></a></figure><p id="62f20f33-0be2-4e7e-9f1f-9f23804cf59d" class="">
+</p><ul id="65997951-7829-4932-88b7-a3de6c0fe25e" class="bulleted-list"><li style="list-style-type:disc"><strong>Several other features of the app:</strong><ul id="178cebc3-a4f4-4772-8f4d-5b092af04ddd" class="bulleted-list"><li style="list-style-type:circle"><strong>Login via Google OAuth 2.0</strong></li></ul><figure id="9b251c30-2cca-4dab-8873-d588907ae793" class="image" style="text-align:center"><a href="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%208.png"><img style="width:192px" src="FitO%20-%20All-in-One%20Health%20Tool%2084a9187700984599a0ed1af57ab0f706/Untitled%208.png"/></a><figcaption>Login Page</figcaption></figure><ul id="51b8620e-6e27-4251-a7c8-782c61cb197f" class="bulleted-list"><li style="list-style-type:circle"><strong>Push Notifications</strong> - There will be notifications thrice at specific times of the day. The notifications remind the user to drink water and mention the same in the app.</li></ul><ul id="59a7ecf7-4616-4692-8400-60d54c27c6d9" class="bulleted-list"><li style="list-style-type:circle"><strong>Motion Sensors</strong> - to calculate the number of steps walked</li></ul><ul id="5dd44130-566c-4dba-a078-f3de25cd4935" class="bulleted-list"><li style="list-style-type:circle"><strong>APIs include</strong> -<strong> EDAMAM API</strong> for Food databases and Recipe so that users can easily add to the food consumed tab.</li></ul><p id="d6aa1377-e8d2-499f-842a-709c19e65f52" class="">
+</p><h2 id="5d4819b0-4c66-45d3-bb93-f2043b4b687a" class="">Contributors</h2><ol type="1" id="a48d2d5c-faf5-424b-8a19-98cd0683b962" class="numbered-list" start="1"><li>Aditya Gorain (2019B5A70942H)</li></ol><ol type="1" id="127159ed-e88c-470c-87eb-a08c20b3d783" class="numbered-list" start="2"><li>Ajinkya Shingane (2019B5A71375H)</li></ol><ol type="1" id="3a45ffa0-d7c2-4c10-b6b7-55ca3608999a" class="numbered-list" start="3"><li>Pranav Bansal (2019B5A71093H)</li></ol><p id="e436e95d-9251-4d88-a596-50772c4b1dad" class="">
+</p><p id="f06beeea-e1ed-4b88-8586-766f358dd047" class="">
+</p><p id="dfa6414f-de59-40f5-9b7f-645304b20dfd" class="">Copyrights Reserved - BITS Pilani Hyderabad Campus</p><p id="950ea874-e54f-456f-a87a-00960e40620d" class="">
+</p></li></ul></div></article></body></html>
